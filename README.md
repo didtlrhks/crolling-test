@@ -77,9 +77,38 @@ python scrape_kstartup.py
 - `pbanc_sn`: 공고 고유 번호
 - `scraped_at`: 수집 시간
 
+## 필터링 기능 사용하기
+
+`scrape_kstartup_filtered.py` 스크립트는 회사 조건에 맞는 공고를 자동으로 필터링합니다.
+
+### 현재 설정된 조건
+- **규모**: 10명 남짓
+- **지원분야**: 헬스케어, 건강, 임상, AI 관련
+- **업력**: 5-7년
+
+### 조건 변경하기
+
+`scrape_kstartup_filtered.py` 파일의 `main()` 함수에서 조건을 수정할 수 있습니다:
+
+```python
+company_filter = CompanyFilter(
+    company_size="10명",
+    support_fields=["헬스케어", "건강", "임상", "AI", "의료", "의약", "바이오", "헬스"],
+    business_years="5-7년"
+)
+```
+
+### 출력 파일
+
+- `kstartup_filtered.json`: 조건에 맞는 공고만 필터링된 JSON 파일
+- `kstartup_filtered.csv`: 조건에 맞는 공고만 필터링된 CSV 파일
+- `kstartup_all.json`: 필터링 전 전체 공고 JSON 파일
+- `kstartup_all.csv`: 필터링 전 전체 공고 CSV 파일
+
 ## 주의사항
 
 - 웹사이트의 구조가 변경되면 스크립트 수정이 필요할 수 있습니다.
 - 과도한 요청은 서버에 부하를 줄 수 있으므로 적절한 딜레이를 두고 사용하세요.
 - 웹사이트의 이용약관을 확인하고 준수하세요.
+- 페이지가 JavaScript로 동적 로드되므로 크롤링에 시간이 걸릴 수 있습니다.
 
